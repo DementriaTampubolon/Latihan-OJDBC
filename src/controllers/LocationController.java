@@ -79,5 +79,9 @@ public class LocationController {
     public List<Location> searchLoc(String key){
         return this.locdao.searchLocation(key);
     }
+
+    public Object selectName(String s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

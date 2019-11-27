@@ -60,4 +60,7 @@ public class DepartmentController {
         return this.dao.searchDepartment(key);
     }
 
+    public Department selectByName(String name) {
+        return this.dao.selectByName(name);
+    }
 }

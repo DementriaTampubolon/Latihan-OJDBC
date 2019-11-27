@@ -571,7 +571,7 @@ public class EmployeesView extends javax.swing.JInternalFrame {
         String dep_name = cmbDepartmen.getSelectedItem().toString();
 
         int manDep = departmentController.selectByName(dep_name).getId();
-
+                
         int a = employeeController.selectById(id).getId();
 
         if (Integer.parseInt(id) == a) {
