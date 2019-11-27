@@ -84,6 +84,12 @@ public class Locations extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblLocation);
 
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtSearchKeyTyped(evt);
+            }
+        });
+
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,35 +270,78 @@ public class Locations extends javax.swing.JInternalFrame {
         txtStreet.setText((String) tblLocation.getValueAt(row, 1));
         txtPostal.setText((String) tblLocation.getValueAt(row, 2));
         txtCity.setText((String) tblLocation.getValueAt(row, 3));
-        txtState.setText((String) tblLocation.getValueAt(row, 4));
-        cmbCountry.setSelectedItem((String) tblLocation.getValueAt(row, 5).toString());
+//        txtState.setText((String) tblLocation.getValueAt(row, 4));
+        if (tblLocation.getValueAt(row, 4).equals("-")) {
+            txtState.setText("");
+        } else {
+            txtState.setText((String) tblLocation.getValueAt(row, 4));
+        }
+//        cmbCountry.setSelectedItem((String) tblLocation.getValueAt(row, 5).toString());
+        String a = (String) tblLocation.getValueAt(row, 5);
+        cmbCountry.setSelectedItem((String) countryController.selectByName(a).getId() + " - " + a);
+//        if (tblLocation.getValueAt(row, 5) == "-") {
+//            cmbCountry.setSelectedIndex(0);
+//        } else {
+////            String[] splitt = tblLocation.getValueAt(row, 5).toString().split(" - ");
+////            String data = splitt[1];
+////            cmbCountry.setSelectedItem(data);
+//
+//            cmbCountry.setSelectedItem((String) tblLocation.getValueAt(row, 5).toString());
+//
+//        }
+
 //        txtCountryid.setText((String) tblLocation.getValueAt(row, 5));
         txtId.setEditable(false);
     }//GEN-LAST:event_tblLocationMousePressed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        String idcou;
         String id = txtId.getText();
         String street = txtStreet.getText();
         String postal = txtPostal.getText();
         String city = txtCity.getText();
         String state = txtState.getText();
         String country = cmbCountry.getSelectedItem().toString();
-//        JOptionPane.showMessageDialog(this, countryid);
+        String[] getIdCountry = country.split(" - ");
+        int cek = cmbCountry.getSelectedIndex();
+
+//        JOptionPane.showMessageDialog(this, id+" - "+street);
+//        JOptionPane.showMessageDialog(this, getIdCountry[0]);
 //        String country = txtCountryid.getText();
-        int a = locationController.selectId(id).getId();
-        if (Integer.parseInt(id) == a) {
-//        if (id.equals(a)) {
-            JOptionPane.showMessageDialog(this, locationController.update(id, 
-                    street, postal, city, state, country));
-//            JOptionPane.showMessageDialog(this, "DIUPDATE!");
+        if (id.equals("")) {
+            JOptionPane.showMessageDialog(this, "Id location is required!");
+        } else if (street.equals("")) {
+            JOptionPane.showMessageDialog(this, "Street Address is required!");
+        } else if (postal.equals("")) {
+            JOptionPane.showMessageDialog(this, "Postal Code is required!");
+        } else if (city.equals("")) {
+            JOptionPane.showMessageDialog(this, "City Name is required!");
+        } //        else if (state.equals("")) {
+        //            JOptionPane.showMessageDialog(this, "State Province is required!");
+        //        }
+        else if (cek == 0) {
+            JOptionPane.showMessageDialog(this, "Country Name is required!");
         } else {
-            JOptionPane.showMessageDialog(this, locationController.create(id, 
-                    street, postal, city, state, country));
+            if (cek == 0) {
+                idcou = null;
+            } else {
+                idcou = getIdCountry[0];
+            }
+            int a = locationController.selectId(id).getId();
+            if (Integer.parseInt(id) == a) {
+//        if (id.equals(a)) {
+                JOptionPane.showMessageDialog(this, locationController.update(id,
+                        street, postal, city, state, idcou));
+//            JOptionPane.showMessageDialog(this, "DIUPDATE!");
+            } else {
+                JOptionPane.showMessageDialog(this, locationController.create(id,
+                        street, postal, city, state, idcou));
 //            JOptionPane.showMessageDialog(this, "DISIMPAN!");
+            }
+            reset();
+            bindingTabel();
         }
-        reset();
-        bindingTabel();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtIdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtIdMouseClicked
@@ -314,6 +363,11 @@ public class Locations extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         filterAngka(evt);
     }//GEN-LAST:event_txtIdKeyTyped
+
+    private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
+        // TODO add your handling code here:
+        bindingTabelSearch();
+    }//GEN-LAST:event_txtSearchKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -358,8 +412,7 @@ public class Locations extends javax.swing.JInternalFrame {
                     "POSTAL CODE",
                     "CITY",
                     "STATE PROVINCE",
-                    "COUNTRY ID",
-                    "NAME"
+                    "COUNTRY ID"
                 }
         );
         for (Location loc : locationController.getAll()) {
@@ -368,9 +421,19 @@ public class Locations extends javax.swing.JInternalFrame {
             o[1] = loc.getStreet();
             o[2] = loc.getPostal();
             o[3] = loc.getCity();
-            o[4] = loc.getState();
-            o[5] = loc.getCountry().getId();
-            o[6] = loc.getCountry().getName();
+//            o[4] = loc.getState();
+            if (loc.getState() == null) {
+                o[4] = "-";
+            } else {
+                o[4] = loc.getState();
+            }
+            o[5] = loc.getCountry().getName();
+//            if (loc.getCountry().getId() == null) {
+//                o[5] = "-";
+//            } else {
+//                o[5] = loc.getCountry().getName();
+//            }
+
             tableModel.addRow(o);
         }
         tblLocation.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -379,6 +442,10 @@ public class Locations extends javax.swing.JInternalFrame {
 
     private void bindingTabelSearch() {
         String search = txtSearch.getText();
+//        String pattern = "[a-zA-Z0-9]";
+////        String pattern = "[a-zA-Z0-9][a-zA-Z0-9]\\s*.";
+//        Pattern p = Pattern.compile(pattern);
+//        Matcher matcher = p.matcher(search);
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(
                 new String[]{
@@ -387,10 +454,10 @@ public class Locations extends javax.swing.JInternalFrame {
                     "POSTAL CODE",
                     "CITY",
                     "STATE PROVINCE",
-                    "COUNTRY ID",
-                    "NAME"
+                    "COUNTRY ID"
                 }
         );
+//        if (matcher.find()) {
         for (Location loc : locationController.searchLoc(search)) {
             Object[] o = new Object[7];
             o[0] = loc.getId();
@@ -398,20 +465,20 @@ public class Locations extends javax.swing.JInternalFrame {
             o[2] = loc.getPostal();
             o[3] = loc.getCity();
             o[4] = loc.getState();
-            o[5] = loc.getCountry().getId();
-            o[6] = loc.getCountry().getName();
+            o[5] = loc.getCountry().getId() + " - " + loc.getCountry().getName();
             tableModel.addRow(o);
         }
+//        }
         tblLocation.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         tblLocation.setModel(tableModel);
     }
 
     public void comboBoxCountry() {
         for (Country country : countryController.getAll()) {
-            cmbCountry.addItem(country.getId());
+            cmbCountry.addItem(country.getId() + " - " + country.getName());
         }
     }
-    
+
     public void filterAngka(KeyEvent a) {
         if (Character.isAlphabetic(a.getKeyChar())) {
             a.consume();

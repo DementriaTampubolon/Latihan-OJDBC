@@ -388,7 +388,7 @@ public class DepartmentsView extends javax.swing.JInternalFrame {
                 o[2] = d.getManId().getId() + " - " + d.getManId().getFirstname();
             }
 //            o[2] = d.getManId().getId() + " " + d.getManId().getFirstname();
-            o[3] = d.getLocId().getCity();
+            o[3] = d.getLocId().getStreet();
             tableModel.addRow(o);
         }
         tblDepartment.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);

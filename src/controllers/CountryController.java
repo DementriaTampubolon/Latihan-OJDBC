@@ -50,6 +50,9 @@ public class CountryController {
     public List<Country> search(String key){
         return this.countryDao.searchCountry(key);
     }
-
+    
+    public Country selectByName(String name){
+        return this.countryDao.selectByName(name);
+    }
 
 }
