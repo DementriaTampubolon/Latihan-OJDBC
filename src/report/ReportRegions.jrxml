@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c9c89d1f-42b0-42a2-9941-abab7f802579">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="134"/>
+	<queryString>
+		<![CDATA[SELECT
+     REGIONS."REGION_ID" AS REGIONS_REGION_ID,
+     REGIONS."REGION_NAME" AS REGIONS_REGION_NAME
+FROM
+     "HR"."REGIONS" REGIONS
+]]>
+	</queryString>
+	<field name="REGIONS_REGION_ID" class="java.math.BigDecimal"/>
+	<field name="REGIONS_REGION_NAME" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="106" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="126" height="106" uuid="34ad6d98-57ee-4ea3-88f8-52a8940db1b3"/>
+				<imageExpression><![CDATA["D:\\Metrodata\\Java\\Demen\\LatihanOJDBC\\src\\report\\cherry.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="111" y="29" width="425" height="66" uuid="de4c9a19-59e8-45c6-a991-0b8bee66791e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bernard MT Condensed" size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Region who have Cherry]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="436" y="0" width="100" height="20" uuid="ecb8fc08-1a29-4b3a-9cae-b6af9260d928"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="33" y="27" width="213" height="20" uuid="302f0055-5e53-44f3-af36-dd45f3a75f7e"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="246" y="27" width="290" height="20" uuid="3f3e82dc-37c9-4e94-b52f-7f42658e447d"/>
+				<text><![CDATA[Name]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="47" y="27" width="100" height="20" uuid="744a27a2-afe2-48ba-97ce-6946ea98a3c3"/>
+				<textFieldExpression><![CDATA[$F{REGIONS_REGION_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="36" width="100" height="20" uuid="004affe3-78a2-4673-8b14-9cc84727a21a"/>
+				<textFieldExpression><![CDATA[$F{REGIONS_REGION_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="14" y="19" width="80" height="20" uuid="7913ef05-2d81-4c5f-b7b3-e003df9b859e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="126" y="19" width="40" height="20" uuid="10bf2481-c6a0-4315-ab75-ef14b281ae99"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
