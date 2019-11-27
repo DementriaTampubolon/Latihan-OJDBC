@@ -187,6 +187,9 @@ public class MainView extends javax.swing.JFrame {
 
     private void mnDepartmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnDepartmentActionPerformed
         // TODO add your handling code here:
+        DepartmentsView dv = new DepartmentsView();
+        dv.show();
+        dskHR.add(dv);
     }//GEN-LAST:event_mnDepartmentActionPerformed
 
     private void mnCountryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCountryActionPerformed

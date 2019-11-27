@@ -18,8 +18,10 @@ public class Location {
 
     public Location() {
     }
-    
-    
+
+    public Location(String city) {
+        this.city = city;
+    }
 
     public Location(int id) {
         this.id = id;

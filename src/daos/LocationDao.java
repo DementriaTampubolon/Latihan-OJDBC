@@ -77,7 +77,7 @@ public class LocationDao {
                 + "l.state_province, "
                 + "c.country_id, "
                 + "c.country_name "
-                + "FROM LOCATIONS L JOIN COUNTRIES C "
+                + "FROM LOCATIONS L LEFT JOIN COUNTRIES C "
                 + "ON l.country_id=c.country_id "
                 + "ORDER BY l.location_id";
         try {
@@ -155,6 +155,22 @@ public class LocationDao {
         return loc;
     }
     
+    public Location selectLocByName(String city) {
+        Location loc = new Location();
+        String query = "SELECT * FROM LOCATIONS WHERE city=?";
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(query);
+            ps.setString(1, city);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                loc.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return loc;
+    }
+    
     /**
      * mencari data location sesuai inputan
      * @param key parameter yang digunakan untuk mencari data
@@ -171,26 +187,36 @@ public class LocationDao {
                 + "l.state_province, "
                 + "c.country_id, "
                 + "c.country_name "
-                + "FROM LOCATIONS L JOIN COUNTRIES C "
+                + "FROM LOCATIONS L LEFT JOIN COUNTRIES C "
                 + "ON l.country_id=c.country_id "
-                + "WHERE l.location_id LIKE ? OR l.street_address LIKE ?";
+                + "WHERE l.location_id LIKE ? OR l.street_address LIKE ? "
+                + "OR l.postal_code LIKE ? OR l.city LIKE ? OR l.state_province LIKE ? "
+                + "OR c.country_name LIKE ?";
+//        try {
+//            PreparedStatement ps = this.connection.prepareStatement(query);
+//            ps.setString(1, "%" + key + "%");
+//            ps.setString(2, "%" + key + "%");
+//            ps.setString(3, "%" + key + "%");
+//            ps.setString(4, "%" + key + "%");
+//            ps.setString(5, "%" + key + "%");
+//            ps.setString(6, "%" + key + "%");
+//                + "FROM LOCATIONS L JOIN COUNTRIES C "
+//                + "ON l.country_id=c.country_id "
+//                + "ORDER BY l.location_id";
         try {
             PreparedStatement ps = this.connection.prepareStatement(query);
-            ps.setString(1, "%" + key + "%");
-            ps.setString(2, "%" + key + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Location location = new Location();
-                location.setId(rs.getInt(1));
-                location.setStreet(rs.getString(2));
-                location.setPostal(rs.getString(3));
-                location.setCity(rs.getString(4));
-                location.setState(rs.getString(5));
+                location.setId(rs.getInt("location_id"));
+                location.setStreet(rs.getString("street_address"));
+                location.setPostal(rs.getString("postal_code"));
+                location.setCity(rs.getString("city"));
+                location.setState(rs.getString("state_province"));
                 location.setCountry(new Country(rs.getString("country_id"), rs.getString("country_name")));
                 ls.add(location);
             }
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return ls;
     }

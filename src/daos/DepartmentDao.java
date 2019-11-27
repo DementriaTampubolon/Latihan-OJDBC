@@ -138,7 +138,21 @@ public class DepartmentDao {
         return department;
     }
     
-    
+    public Department selectByName(String name) {
+        Department department = new Department();
+        String query = "SELECT * FROM DEPARTMENTS WHERE department_name = ?";
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(query);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                department.setId(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return department;
+    }
     
 
     /**
@@ -208,20 +222,5 @@ public class DepartmentDao {
         return result;
     }
 
-    public Department selectByName(String name) {
-        Department department = new Department();
-        String query = "SELECT * FROM DEPARTMENTS WHERE department_name = ?";
-        try {
-            PreparedStatement ps = this.connection.prepareStatement(query);
-            ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                department.setId(rs.getInt(1));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return department;
-    }
-
 }
+

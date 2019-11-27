@@ -62,5 +62,5 @@ public class DepartmentController {
 
     public Department selectByName(String name) {
         return this.dao.selectByName(name);
-    }
+}
 }

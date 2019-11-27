@@ -154,5 +154,22 @@ public class CountryDao {
         }
         return false;
     }
+    
+    public Country selectByName(String name) {
+        Country country = new Country();
+        String query = "SELECT * FROM COUNTRIES WHERE COUNTRY_NAME = ?";
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(query);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                country.setId(rs.getString("country_id"));
+                country.setName(rs.getString("country_name"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return country;
+    }
 
 }

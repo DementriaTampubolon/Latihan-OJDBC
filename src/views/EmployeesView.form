@@ -119,10 +119,10 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="txtId" alignment="0" min="-2" pref="155" max="-2" attributes="0"/>
                               <Component id="txtLName" alignment="0" max="32767" attributes="0"/>
-                              <Component id="cmbDepartmen" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cmbDepartmen" alignment="0" pref="246" max="32767" attributes="0"/>
                               <Component id="cmbJob" max="32767" attributes="0"/>
-                              <Component id="txtHire" alignment="0" pref="246" max="32767" attributes="0"/>
                               <Component id="txtComm" alignment="1" max="32767" attributes="0"/>
+                              <Component id="txtHire" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -186,16 +186,23 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblEmail" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="txtPhone" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="lblphone" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="txtPhone" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtHire" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="txtHire" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblphone" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -377,8 +384,6 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="com.toedter.calendar.JDateChooser" name="txtHire">
-        </Component>
         <Component class="javax.swing.JLabel" name="lblId">
         </Component>
         <Component class="javax.swing.JLabel" name="lblphone">
@@ -392,6 +397,8 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblEmail">
+        </Component>
+        <Component class="com.toedter.calendar.JDateChooser" name="txtHire">
         </Component>
       </SubComponents>
     </Container>

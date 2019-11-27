@@ -31,7 +31,12 @@ public class LocationController {
     
     public String create(String id, String street, String postal, String city, 
             String state, String country){
-        return this.locdao.createLocation(new Location(Integer.parseInt(id), street, postal, city, state, new Country(country))) ?
+
+        return locdao.createLocation(new Location(Integer.parseInt(id), street, 
+                postal, city, state, new Country(country))) ?
+
+//        return this.locdao.createLocation(new Location(Integer.parseInt(id), street, postal, city, state, new Country(country))) ?
+
                 "Success to create new location" : "Failed Create Data!";
     }
     
@@ -70,6 +75,9 @@ public class LocationController {
         return this.locdao.selectLocById(new Location(Integer.parseInt(id)));
         
     }
+    public Location selectName(String city){
+        return this.locdao.selectLocByName(city);
+    }
     
     /**
      * controller untuk menampilkan data sesuai inputan
@@ -78,10 +86,6 @@ public class LocationController {
      */
     public List<Location> searchLoc(String key){
         return this.locdao.searchLocation(key);
-    }
-
-    public Object selectName(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
