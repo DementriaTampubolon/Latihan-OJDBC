@@ -54,7 +54,11 @@ public class DepartmentController {
 
         return this.dao.selectById(Integer.parseInt(id));
     }
-
+    
+    public Department selectByName(String name) {
+        return this.dao.selectByName(name);
+    }
+   
     public List<Department> search(String key) {
 
         return this.dao.searchDepartment(key);
