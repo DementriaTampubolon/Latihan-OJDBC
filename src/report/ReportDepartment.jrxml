@@ -40,12 +40,8 @@ ORDER BY 1]]>
 	</background>
 	<title>
 		<band height="102" splitType="Stretch">
-			<image>
-				<reportElement x="725" y="0" width="77" height="102" uuid="7b4c125d-2a77-405d-9cd0-9c1dd2e19f36"/>
-				<imageExpression><![CDATA["cherry.jpg"]]></imageExpression>
-			</image>
 			<frame>
-				<reportElement mode="Opaque" x="0" y="0" width="721" height="66" backcolor="#000000" uuid="3d279949-37ad-4721-a5fb-b4815fbcbc8b"/>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="66" backcolor="#000000" uuid="3d279949-37ad-4721-a5fb-b4815fbcbc8b"/>
 				<staticText>
 					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="6bcb7ada-fc20-424a-8763-50adf0324753"/>
 					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
@@ -63,7 +59,7 @@ ORDER BY 1]]>
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement mode="Opaque" x="0" y="70" width="721" height="32" forecolor="#000000" backcolor="#CC0000" uuid="9f128ef1-62e7-41bb-b070-4a794d30c414"/>
+				<reportElement mode="Opaque" x="0" y="70" width="802" height="32" forecolor="#000000" backcolor="#CC0000" uuid="9f128ef1-62e7-41bb-b070-4a794d30c414"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
 					<reportElement x="553" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="16df18cd-d339-475d-961a-befb5773e186"/>
 					<textElement textAlignment="Right">
