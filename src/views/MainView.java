@@ -46,6 +46,7 @@ public class MainView extends javax.swing.JFrame {
         mnReportRegion = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         mnReportEmployee = new javax.swing.JMenuItem();
+        mnReportLocation = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -147,6 +148,14 @@ public class MainView extends javax.swing.JFrame {
         });
         jMenu2.add(mnReportEmployee);
 
+        mnReportLocation.setText("Location");
+        mnReportLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnReportLocationActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnReportLocation);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -225,6 +234,12 @@ public class MainView extends javax.swing.JFrame {
         dskHR.add(reportView);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void mnReportLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnReportLocationActionPerformed
+        ReportView reportView = new ReportView("Location");
+        reportView.show();
+        dskHR.add(reportView);
+    }//GEN-LAST:event_mnReportLocationActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -274,6 +289,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnLocation;
     private javax.swing.JMenuItem mnRegion;
     private javax.swing.JMenuItem mnReportEmployee;
+    private javax.swing.JMenuItem mnReportLocation;
     private javax.swing.JMenuItem mnReportRegion;
     // End of variables declaration//GEN-END:variables
 }
