@@ -8,6 +8,8 @@ package controllers;
 import daos.DepartmentDao;
 import java.util.List;
 import models.Department;
+import models.Employee;
+import models.Location;
 import models.Region;
 
 /**
@@ -27,27 +29,18 @@ public class DepartmentController {
     }
 
     public String create(String id, String name, String manid, String locid) {
-//        String message="Failed to Create Region";
-//        Region region = new Region();
-//        int ids = Integer.parseInt(id);
-//        region.setId(ids);
-//        region.setName(name);
-//        if(this.dao.createRegion(new Region(Integer.parseInt(id), name))){
-//            message="Success to Create Region";
-//        }
-//        return this.dao.createRegion(new Region(Integer.parseInt(id), name)) ?
-        return this.dao.createDepartment(new Department(Integer.parseInt(id), name, Integer.parseInt(manid), Integer.parseInt(locid)))
+        return this.dao.createDepartment(new Department(Integer.parseInt(id), name, new Employee(Integer.parseInt(manid)), new Location(Integer.parseInt(locid))))
                 ? "Success to Create Department" : "Failed to Create Department";
     }
 
     public String update(String id, String name, String manid, String locid) {
-        return this.dao.updateDepartment(new Department(Integer.parseInt(id), name, Integer.parseInt(manid), Integer.parseInt(locid)))
+        return this.dao.updateDepartment(new Department(Integer.parseInt(id), name, new Employee(Integer.parseInt(manid)), new Location(Integer.parseInt(locid))))
                 ? "Success to Update Department" : "Failed to Update Department";
     }
 
     public String delete(String id) {
-        //return this.dao.deleteDepartment(new Department(Integer.parseInt(id))) ? "sukses dong" : "gagal dong";
-        return this.dao.deleteDepartment(Integer.parseInt(id))
+//        return this.dao.deleteDepartment(Integer.parseInt(id))
+        return this.dao.deleteDepartment(new Department(Integer.parseInt(id)))
                 ? "Success to Delete Department" : "Failed to Delete Department";
 
     }
@@ -60,11 +53,6 @@ public class DepartmentController {
     public Department selectById(String id) {
 
         return this.dao.selectById(Integer.parseInt(id));
-    }
-
-    public Department selectByName(String name) {
-
-        return this.dao.selectByName(name);
     }
 
     public List<Department> search(String key) {

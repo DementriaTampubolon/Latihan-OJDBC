@@ -10,10 +10,11 @@ package models;
  * @author HP
  */
 public class Department {
+    
     private int id;
     private String name;
-    private int manId;
-    private int locId;
+    private Employee manId;
+    private Location locId;
 
     public Department() {
     }
@@ -22,25 +23,18 @@ public class Department {
         this.id = id;
     }
 
-    public Department(String name) {
+    public Department(int id, String name) {
+        this.id = id;
         this.name = name;
     }
-    
 
-    public Department(int id, String name, int manId, int locId) {
+    public Department(int id, String name, Employee manId, Location locId) {
         this.id = id;
         this.name = name;
         this.manId = manId;
         this.locId = locId;
     }
 
-    public Department(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    
-    
     public int getId() {
         return id;
     }
@@ -57,19 +51,19 @@ public class Department {
         this.name = name;
     }
 
-    public int getManId() {
+    public Employee getManId() {
         return manId;
     }
 
-    public void setManId(int manId) {
+    public void setManId(Employee manId) {
         this.manId = manId;
     }
 
-    public int getLocId() {
+    public Location getLocId() {
         return locId;
     }
 
-    public void setLocId(int locId) {
+    public void setLocId(Location locId) {
         this.locId = locId;
     }
     
