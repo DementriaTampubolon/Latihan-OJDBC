@@ -11,6 +11,7 @@ import controllers.JobController;
 import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -27,7 +28,12 @@ public class Setting {
             lbl.setText("");
         }
     }
-
+public void  checkAlphabet(java.awt.event.KeyEvent b){
+        if (Character.isDigit(b.getKeyChar())) {
+            b.consume();
+            JOptionPane.showMessageDialog(null, "In the Number column you can only enter the character letters");
+        }
+}
     public void checkLength(JTextField txt, int size, KeyEvent evt, JLabel lbl) {
         if (txt.getText().length() >= size) {
             evt.consume();

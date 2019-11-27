@@ -7,12 +7,12 @@ package views;
 
 import controllers.JobController;
 import java.awt.event.KeyEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.Job;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import models.Region;
+import tools.Setting;
 
 /**
  *
@@ -56,6 +56,8 @@ public class JobsView extends javax.swing.JInternalFrame {
         txttitle = new javax.swing.JTextField();
         txtmin = new javax.swing.JTextField();
         txtmax = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
 
@@ -101,9 +103,9 @@ public class JobsView extends javax.swing.JInternalFrame {
         jPanel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jPanel1.setName(""); // NOI18N
 
-        jLabel1.setText("Job ID");
+        jLabel1.setText("ID");
 
-        jLabel2.setText("Job Title");
+        jLabel2.setText("Title");
 
         jLabel3.setText("Min Salary");
 
@@ -129,6 +131,11 @@ public class JobsView extends javax.swing.JInternalFrame {
         txtid.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtidMouseClicked(evt);
+            }
+        });
+        txtid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidActionPerformed(evt);
             }
         });
         txtid.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -168,31 +175,41 @@ public class JobsView extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setText("Masukkan Huruf");
+
+        jLabel6.setText("Masukkan Angka");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton2))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2))
-                            .addGap(42, 42, 42)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtid, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                .addComponent(txttitle)
-                                .addComponent(txtmin)
-                                .addComponent(txtmax)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel5)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txttitle)
+                            .addComponent(txtmin)
+                            .addComponent(txtmax)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)))
+                .addGap(28, 28, 28))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,12 +217,13 @@ public class JobsView extends javax.swing.JInternalFrame {
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txttitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,10 +231,11 @@ public class JobsView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtmax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel6))
                 .addContainerGap())
         );
 
@@ -229,6 +248,11 @@ public class JobsView extends javax.swing.JInternalFrame {
         });
 
         txtSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtSearchKeyTyped(evt);
@@ -263,8 +287,8 @@ public class JobsView extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(29, 29, 29))
         );
 
         pack();
@@ -280,7 +304,7 @@ public class JobsView extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String id = txtid.getText();
-        String title = txttitle.getText();
+        String titlee = txttitle.getText();
         String min = txtmin.getText();
         String max = txtmax.getText();
         int hapus;
@@ -296,11 +320,6 @@ public class JobsView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        String key = txtSearch.getText();
-        String regex = "[a-zA-Z]";
-        boolean matches = Pattern.matches(regex, key);
-        JOptionPane.showMessageDialog(this, jobController.search(key));
-
         bindingTabelSearch();
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -309,27 +328,28 @@ public class JobsView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSearchKeyTyped
 
     private void txtminKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtminKeyTyped
-        filterhuruf(evt);
+        new Setting().checkNumber(evt, jLabel5);
     }//GEN-LAST:event_txtminKeyTyped
 
     private void txtmaxKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtmaxKeyTyped
-        filterhuruf(evt);
+        new Setting().checkNumber(evt, jLabel5);
     }//GEN-LAST:event_txtmaxKeyTyped
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         String id = txtid.getText();
-        String title = txttitle.getText();
+        String titlee = txttitle.getText();
         String min = txtmin.getText();
         String max = txtmax.getText();
         String a = jobController.selectById(id).getId();
         if (id.equals(a)) {
-            JOptionPane.showMessageDialog(this, jobController.update(id, title, min, max));
+            JOptionPane.showMessageDialog(this, jobController.update(id, titlee, min, max));
             hapus();
             bindingTabel();
         } else {
-            JOptionPane.showMessageDialog(this, jobController.create(id, title, min, max));
+            JOptionPane.showMessageDialog(this, jobController.create(id, titlee, min, max));
+            hapus();
+            bindingTabel();
         }
-        bindingTabel();
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void tblJobsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblJobsMouseClicked
@@ -346,12 +366,20 @@ public class JobsView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtidMouseClicked
 
     private void txtidKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidKeyTyped
-        filterangka(evt);
+        new Setting().checkAlphabet(evt);
     }//GEN-LAST:event_txtidKeyTyped
 
     private void txttitleKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttitleKeyTyped
-        filterangka(evt);
+        new Setting().checkAlphabet(evt);
     }//GEN-LAST:event_txttitleKeyTyped
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void txtidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -362,6 +390,8 @@ public class JobsView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -386,15 +416,16 @@ public class JobsView extends javax.swing.JInternalFrame {
                 }
         );
 
-        for (Job job
-                : jobController.getAll()) {
+        jobController.getAll().stream().map((jobs) -> {
             Object[] o = new Object[4];
-            o[0] = job.getId();
-            o[1] = job.getTitle();
-            o[2] = job.getMin_salary();
-            o[3] = job.getMax_salary();
+            o[0] = jobs.getId();
+            o[1] = jobs.getTitle();
+            o[2] = jobs.getMin_salary();
+            o[3] = jobs.getMax_salary();
+            return o;
+        }).forEachOrdered((o) -> {
             tableModel.addRow(o);
-        }
+        });
 
         tblJobs.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
 
@@ -402,19 +433,21 @@ public class JobsView extends javax.swing.JInternalFrame {
     }
 
     private void bindingTabelSearch() {
-        String key = txtSearch.getText();
+        String search = txtSearch.getText();
+
+//        String pattern = "[a-zA-Z0-9].*i";
+//        Pattern p = Pattern.compile(pattern);
+//        Matcher matcher = p.matcher(search);
         DefaultTableModel tableModel = new DefaultTableModel();
         tableModel.setColumnIdentifiers(
                 new String[]{
-                    "ID",
+                    "JOB ID",
                     "JOB TITLE",
                     "MIN SALARY",
                     "MAX SALARY"
                 }
         );
-
-        for (Job job
-                : jobController.search(key)) {
+        for (Job job : jobController.searchJob(search)) {
             Object[] o = new Object[4];
             o[0] = job.getId();
             o[1] = job.getTitle();
@@ -422,24 +455,9 @@ public class JobsView extends javax.swing.JInternalFrame {
             o[3] = job.getMax_salary();
             tableModel.addRow(o);
         }
-
         tblJobs.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         tblJobs.setModel(tableModel);
-    }
-
-    void filterhuruf(KeyEvent a) {
-        if (Character.isAlphabetic(a.getKeyChar())) {
-            a.consume();
-            JOptionPane.showMessageDialog(null, "The Amount Column Can Only Enter Number Characters");
-        }
-    }
-
-    void filterangka(KeyEvent b) {
-        if (Character.isDigit(b.getKeyChar())) {
-            b.consume();
-            JOptionPane.showMessageDialog(null, "In the Number column you can only enter the character letters");
-        }
     }
 
     private void hapus() {

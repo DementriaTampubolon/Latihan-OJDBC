@@ -32,7 +32,7 @@ public class JobDao {
 
     public List<Job> selectJob() {
         List<Job> jobs = new ArrayList<Job>();
-        String query = "select * from jobs order by 1";
+        String query = "select * from jobs order by job_id ASC";
         try {
             PreparedStatement ps = this.connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
@@ -40,8 +40,8 @@ public class JobDao {
                 Job job = new Job();
                 job.setId(rs.getString("job_id"));
                 job.setTitle(rs.getString("job_title"));
-                job.setMin_salary(rs.getInt(3));
-                job.setMax_salary(rs.getInt(4));
+                job.setMin_salary(rs.getInt("min_salary"));
+                job.setMax_salary(rs.getInt("max_salary"));
                 jobs.add(job);
             }
         } catch (Exception e) {
@@ -89,43 +89,24 @@ public class JobDao {
         }
         return job;
     }
-    public Job selectByName(String name) {
-        Job job = new Job();
-        String query = "select * from jobs where job_title=?";
-        try {
-            PreparedStatement ps = this.connection.prepareStatement(query);
-            ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-
-                job.setId(rs.getString("job_id"));
-                job.setTitle(rs.getString("job_title"));
-                job.setMin_salary(rs.getInt(3));
-                job.setMax_salary(rs.getInt(4));
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return job;
-    }
-    
-    
 
     public List<Job> searchJob(String key) {
         List<Job> jobs = new ArrayList<>();
-        String query = "Select * from jobs where job_id like ? or job_title like ?";
+        String query = "Select job_id, job_title, min_salary, max_salary from jobs where job_id like ? or job_title like ? or min_salary like ? or max_salary like ?";
         try {
             PreparedStatement ps = this.connection.prepareStatement(query);
             ps.setString(1, "%" + key + "%");
             ps.setString(2, "%" + key + "%");
+            ps.setString(3, "%" + key + "%");
+            ps.setString(4, "%" + key + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Job job = new Job();
                 job.setId(rs.getString("job_id"));
                 job.setTitle(rs.getString("job_title"));
-                job.setMin_salary(rs.getInt(3));
-                job.setMax_salary(rs.getInt(4));
+                job.setMin_salary(rs.getInt("min_salary"));
+                job.setMax_salary(rs.getInt("max_salary"));
+
                 jobs.add(job);
             }
 
@@ -153,5 +134,9 @@ public class JobDao {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public Job selectByName(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
