@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="99648da5-06d1-48fc-be1c-a7a9231dc9b3">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="246"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
@@ -28,7 +28,7 @@ FROM
 	<title>
 		<band height="102" splitType="Stretch">
 			<frame>
-				<reportElement mode="Opaque" x="2" y="4" width="728" height="66" backcolor="#009999" uuid="5e675bb6-39b3-4390-86f0-cbe1a0ed1212"/>
+				<reportElement mode="Opaque" x="2" y="4" width="800" height="66" backcolor="#009999" uuid="5e675bb6-39b3-4390-86f0-cbe1a0ed1212"/>
 				<staticText>
 					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="2faf75b9-e2d6-4a6c-a034-5967dc3e97a8"/>
 					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
@@ -46,7 +46,7 @@ FROM
 				</staticText>
 			</frame>
 			<frame>
-				<reportElement mode="Opaque" x="0" y="70" width="730" height="32" forecolor="#000000" backcolor="#999999" uuid="351052de-d2ff-4a24-b2b7-b659f09df05e"/>
+				<reportElement mode="Opaque" x="0" y="70" width="802" height="32" forecolor="#000000" backcolor="#999999" uuid="351052de-d2ff-4a24-b2b7-b659f09df05e"/>
 				<textField pattern="EEEEE dd MMMMM yyyy">
 					<reportElement x="553" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="51f9e762-893b-4407-a53f-1e59f5c6a621"/>
 					<textElement textAlignment="Right">
@@ -55,10 +55,6 @@ FROM
 					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>
 			</frame>
-			<image>
-				<reportElement x="723" y="4" width="79" height="98" backcolor="#006666" uuid="968d28fe-21ac-452f-a6c1-838cae55a5ce"/>
-				<imageExpression><![CDATA["D:\\Metrodata\\Java\\Demen\\LatihanOJDBC\\src\\report\\cherry.jpg"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
