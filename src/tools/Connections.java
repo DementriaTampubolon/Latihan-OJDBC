@@ -33,7 +33,7 @@ public class Connections {
             dataSource.setDatabaseName("HR");
 
             dataSource.setUser("system");
-            dataSource.setPassword("rizky");
+            dataSource.setPassword("jafar");
             this.connection = dataSource.getConnection();
             this.connection.createStatement().execute("alter session set current_schema=HR");
 

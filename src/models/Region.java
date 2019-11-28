@@ -28,6 +28,11 @@ public class Region {
         this.name = name;
     }
 
+    public Region(String name) {
+        this.name = name;
+    }
+    
+
     /**
      * method untuk mengambil nilai id
      *

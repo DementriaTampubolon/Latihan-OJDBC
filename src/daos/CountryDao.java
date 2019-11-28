@@ -96,12 +96,25 @@ public class CountryDao {
 
     public List<Country> searchCountry(String key) {
         List<Country> country = new ArrayList<>();
-        String query = "select * from countries where country_id like ?"
-                + " OR lower(country_name) like ? ";
+        String query = "Select"
+                + " c.country_id,c.country_name,r.region_name,r.region_id "
+                + "from "
+                + " countries c "
+                + "JOIN"
+                + " regions r "
+                + "ON"
+                + " c.region_id = r.region_id "
+                + "where"
+                + " country_id like ? "
+                + "OR "
+                + " lower(country_name) like ? "
+                +"OR "
+                + " region_name like ? ";
         try {
             PreparedStatement ps = this.connection.prepareStatement(query);
             ps.setString(1, "%" + key + "%");
             ps.setString(2, "%" + key + "%");
+            ps.setString(3, "%" + key + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) { //next itu untuk looping selanjutnya (karna yg di next adlh rs.next dan rs itu
                 Country country1 = new Country();
@@ -136,6 +149,22 @@ public class CountryDao {
         return country;
     }
 
+    public Country selectByName(String name) {
+        Country country = new Country();
+        String query = "select * from countries where country_name = ?";
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(query);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                country.setId(rs.getString(1));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return country;
+    }
+
     private boolean execute(String query, Country country) {
         boolean result = false;
         try {
@@ -153,23 +182,6 @@ public class CountryDao {
             e.printStackTrace();
         }
         return false;
-    }
-    
-    public Country selectByName(String name) {
-        Country country = new Country();
-        String query = "SELECT * FROM COUNTRIES WHERE COUNTRY_NAME = ?";
-        try {
-            PreparedStatement ps = this.connection.prepareStatement(query);
-            ps.setString(1, name);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                country.setId(rs.getString("country_id"));
-                country.setName(rs.getString("country_name"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return country;
     }
 
 }

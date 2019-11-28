@@ -5,9 +5,11 @@
  */
 package tools;
 
+import controllers.CountryController;
 import controllers.DepartmentController;
 import controllers.EmployeeController;
 import controllers.JobController;
+import controllers.RegionController;
 import java.awt.event.KeyEvent;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -72,5 +74,5 @@ public void  checkAlphabet(KeyEvent evt){
 //        }
 //
 //    }
-
+  
 }

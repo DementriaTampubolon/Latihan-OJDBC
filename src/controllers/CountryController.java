@@ -47,12 +47,13 @@ public class CountryController {
      public Country selectById(String id){
         return this.countryDao.selectById(id);
     }
+     public Country selectByName(String name){
+        return this.countryDao.selectById(name);
+    }
     public List<Country> search(String key){
         return this.countryDao.searchCountry(key);
     }
     
-    public Country selectByName(String name){
-        return this.countryDao.selectByName(name);
-    }
+
 
 }

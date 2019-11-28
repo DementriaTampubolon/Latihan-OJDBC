@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ASUS
  */
-public class Country extends javax.swing.JInternalFrame {
+public class CountriesView extends javax.swing.JInternalFrame {
 
     models.Country country = new models.Country();
     CountryController countryController = new CountryController();
@@ -24,11 +24,10 @@ public class Country extends javax.swing.JInternalFrame {
     /**
      * Creates new form Country
      */
-    public Country() {
+    public CountriesView() {
         initComponents();
         bindingTabel();
         comboboxRegions();
-        
 
     }
 
@@ -96,8 +95,6 @@ public class Country extends javax.swing.JInternalFrame {
                 bt_delete1ActionPerformed(evt);
             }
         });
-
-        cmbRegion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Choose--" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -224,7 +221,9 @@ public class Country extends javax.swing.JInternalFrame {
         tid.setText((String) tbl_countries.getValueAt(row, 0));
         tname.setText((String) tbl_countries.getValueAt(row, 1));
 //       tregion_id.setText((String) tbl_countries.getValueAt(row, 2).toString());
-        cmbRegion.setSelectedItem((String) tbl_countries.getValueAt(row, 2).toString());
+        String regionName = (String) tbl_countries.getValueAt(row, 2).toString();
+        cmbRegion.setSelectedItem(regionController.selectByName(regionName).getId()+" - "+regionName);
+        
 
         tid.setEnabled(false);
     }//GEN-LAST:event_tbl_countriesMousePressed
@@ -312,7 +311,7 @@ public class Country extends javax.swing.JInternalFrame {
             Object[] o = new Object[3];
             o[0] = c.getId();
             o[1] = c.getName();
-            o[2] = c.getRegion().getId() + " " + c.getRegion().getName();
+            o[2] = c.getRegion().getName();
             tableModel.addRow(o);
         }
         tbl_countries.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -321,7 +320,7 @@ public class Country extends javax.swing.JInternalFrame {
 
     private void comboboxRegions() {
         for (models.Region r : regionController.getAll()) {
-            cmbRegion.addItem(r.getId() + " " + r.getName());
+            cmbRegion.addItem(r.getId() + " - " + r.getName());
         }
     }
 
@@ -340,7 +339,7 @@ public class Country extends javax.swing.JInternalFrame {
             Object[] o = new Object[3];
             o[0] = c.getId();
             o[1] = c.getName();
-            o[2] = c.getRegion().getId() + " " + c.getRegion().getName();
+            o[2] = c.getRegion().getName();
             tableModel.addRow(o);
         }
         tbl_countries.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);

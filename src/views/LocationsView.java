@@ -18,7 +18,7 @@ import models.Location;
  *
  * @author Rizky
  */
-public class Locations extends javax.swing.JInternalFrame {
+public class LocationsView extends javax.swing.JInternalFrame {
 
     Location location = new Location();
     LocationController locationController = new LocationController();
@@ -28,7 +28,7 @@ public class Locations extends javax.swing.JInternalFrame {
     /**
      * Creates new form Locations
      */
-    public Locations() {
+    public LocationsView() {
         initComponents();
         bindingTabel();
         comboBoxCountry();
@@ -277,8 +277,8 @@ public class Locations extends javax.swing.JInternalFrame {
             txtState.setText((String) tblLocation.getValueAt(row, 4));
         }
 //        cmbCountry.setSelectedItem((String) tblLocation.getValueAt(row, 5).toString());
-        String a = (String) tblLocation.getValueAt(row, 5);
-        cmbCountry.setSelectedItem((String) countryController.selectByName(a).getId() + " - " + a);
+        String countryname = (String) tblLocation.getValueAt(row, 5);
+        cmbCountry.setSelectedItem((String) countryController.selectByName(countryname).getId() + " - " + countryname);
 //        if (tblLocation.getValueAt(row, 5) == "-") {
 //            cmbCountry.setSelectedIndex(0);
 //        } else {

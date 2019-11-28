@@ -140,6 +140,23 @@ public class RegionDao {
         }
         return region;
     }
+    public Region selectByName(String name) {
+        Region region = new Region();
+        String query = "select * from regions where region_name=?";
+        try {
+            PreparedStatement ps = this.connection.prepareStatement(query);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                region.setId(rs.getInt(1));
+                region.setName(rs.getString("region_name"));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return region;
+    }
 
     /**
      * method untuk mencari region method ini non void menggunakan tipe list
